@@ -1,21 +1,160 @@
 ---
-// Sin props
+const FORMSPREE_URL = "https://formspree.io/f/mkopalea"
 ---
+
 <section class="py-32 px-6 bg-surface relative" id="contacto">
   <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(111,61,217,0.05)_0%,_transparent_70%)] pointer-events-none"></div>
-  <div class="max-w-4xl mx-auto glass-panel p-12 md:p-20 rounded-[3rem] text-center">
-    <h2 class="font-headline text-4xl md:text-6xl font-extrabold text-on-surface mb-6">
-      ¿Tienes un proyecto en mente?
-    </h2>
-    <p class="text-on-surface-variant text-xl mb-12">
-      Estoy disponible para freelance, colaboraciones y empleo. Hablemos.
-    </p>
-    <a
-      href="mailto:tu@email.com"
-      class="btn-primary text-on-primary font-bold px-12 py-5 rounded-full text-xl hover:shadow-[0_0_50px_rgba(111,61,217,0.5)] transition-all inline-flex items-center gap-3"
+
+<div class="max-w-2xl mx-auto glass-panel p-6 sm:p-10 md:p-12 rounded-2xl md:rounded-[3rem]">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h2 class="font-headline text-4xl md:text-5xl font-extrabold text-on-surface mb-4">
+        ¿Tienes un proyecto en mente?
+      </h2>
+      <p class="text-on-surface-variant text-lg">
+        Estoy disponible para freelance, colaboraciones y empleo. Hablemos.
+      </p>
+    </div>
+
+    <!-- Formulario -->
+    <form
+      id="contact-form"
+      action={FORMSPREE_URL}
+      method="POST"
+      class="space-y-6"
     >
-      Enviar mensaje
-      <span class="material-symbols-outlined">send</span>
-    </a>
+      <!-- Nombre + Email -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="flex flex-col gap-2">
+          <label for="name" class="text-on-surface-variant text-sm font-semibold uppercase tracking-widest">
+            Nombre
+          </label>
+          <input
+            id="name"
+            type="text"
+            name="name"
+            required
+            placeholder="Tu nombre"
+            class="bg-surface-container border border-outline-variant/30 text-on-surface rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/30 transition-all placeholder:text-on-surface-variant/40"
+          />
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="email" class="text-on-surface-variant text-sm font-semibold uppercase tracking-widest">
+            Correo
+          </label>
+          <input
+            id="email"
+            type="email"
+            name="email"
+            required
+            placeholder="tu@correo.com"
+            class="bg-surface-container border border-outline-variant/30 text-on-surface rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/30 transition-all placeholder:text-on-surface-variant/40"
+          />
+        </div>
+      </div>
+
+        <!-- Teléfono (opcional) -->
+        <div class="flex flex-col gap-2">
+          <label for="phone" class="text-on-surface-variant text-sm font-semibold uppercase tracking-widest">
+            Teléfono
+            <span class="text-on-surface-variant/40 normal-case tracking-normal font-normal ml-1">(opcional)</span>
+          </label>
+          <input
+            id="phone"
+            type="tel"
+            name="phone"
+            placeholder="+506 8888 8888"
+            class="bg-surface-container border border-outline-variant/30 text-on-surface rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/30 transition-all placeholder:text-on-surface-variant/40"
+          />
+        </div>
+
+      <!-- Asunto -->
+      <div class="flex flex-col gap-2">
+        <label for="subject" class="text-on-surface-variant text-sm font-semibold uppercase tracking-widest">
+          Asunto
+        </label>
+        <input
+          id="subject"
+          type="text"
+          name="subject"
+          placeholder="¿En qué puedo ayudarte?"
+          class="bg-surface-container border border-outline-variant/30 text-on-surface rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/30 transition-all placeholder:text-on-surface-variant/40"
+        />
+      </div>
+
+      <!-- Mensaje -->
+      <div class="flex flex-col gap-2">
+        <label for="message" class="text-on-surface-variant text-sm font-semibold uppercase tracking-widest">
+          Mensaje
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          required
+          rows="5"
+          placeholder="Cuéntame sobre tu proyecto..."
+          class="bg-surface-container border border-outline-variant/30 text-on-surface rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/30 transition-all placeholder:text-on-surface-variant/40 resize-none"
+        ></textarea>
+      </div>
+
+      <!-- Botón -->
+      <button
+        type="submit"
+        id="submit-btn"
+        class="btn-primary w-full text-on-primary font-bold py-3 sm:py-4 rounded-full text-base sm:text-lg hover:shadow-[0_0_50px_rgba(111,61,217,0.5)] transition-all flex items-center justify-center gap-3"
+        >
+        <span id="btn-text">Enviar mensaje</span>
+        <span id="btn-icon" class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">send</span>
+      </button>
+
+      <!-- Mensaje de éxito -->
+      <div id="success-msg" class="hidden text-center py-4 text-green-400 font-semibold">
+        ¡Mensaje enviado! Te responderé pronto.
+      </div>
+
+      <!-- Mensaje de error -->
+      <div id="error-msg" class="hidden text-center py-4 text-red-400 font-semibold">
+        Algo salió mal. Intenta de nuevo.
+      </div>
+    </form>
+
   </div>
 </section>
+
+<script>
+  const form       = document.getElementById('contact-form') as HTMLFormElement
+  const btnText    = document.getElementById('btn-text') as HTMLSpanElement
+  const btnIcon    = document.getElementById('btn-icon') as HTMLSpanElement
+  const submitBtn  = document.getElementById('submit-btn') as HTMLButtonElement
+  const successMsg = document.getElementById('success-msg') as HTMLDivElement
+  const errorMsg   = document.getElementById('error-msg') as HTMLDivElement
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault()
+
+    btnText.textContent = 'Enviando...'
+    btnIcon.style.display = 'none'
+    submitBtn.disabled = true
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }
+      })
+
+      if (response.ok) {
+        form.reset()
+        successMsg.classList.remove('hidden')
+        btnText.textContent = 'Mensaje enviado'
+      } else {
+        throw new Error('Error')
+      }
+    } catch {
+      errorMsg.classList.remove('hidden')
+      btnText.textContent = 'Enviar mensaje'
+      btnIcon.style.display = 'inline'
+      submitBtn.disabled = false
+    }
+  })
+</script>

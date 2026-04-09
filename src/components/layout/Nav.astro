@@ -1,20 +1,94 @@
 ---
-// sin props por ahora
+const links = [
+  { label: "Home",      href: "#home"      },
+  { label: "Sobre Mí",  href: "#sobre-mi"  },
+  { label: "Servicios", href: "#servicios" },
+  { label: "Proyectos", href: "#proyectos" },
+]
 ---
+
 <nav class="fixed top-0 w-full z-50 bg-slate-950/70 backdrop-blur-xl shadow-[0_0_40px_rgba(85,22,190,0.06)]">
   <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+
     <span class="text-2xl font-bold tracking-tighter text-slate-100 font-headline">
       Génesis Morales
     </span>
-    <div class="hidden md:flex gap-8 font-headline tracking-tight">
-      <a class="text-violet-300 font-semibold border-b-2 border-violet-400 pb-1" href="#home">Home</a>
-      <a class="text-slate-400 font-medium hover:text-slate-100 transition-colors" href="#sobre-mi">Sobre Mí</a>
-      <a class="text-slate-400 font-medium hover:text-slate-100 transition-colors" href="#servicios">Servicios</a>
-      <a class="text-slate-400 font-medium hover:text-slate-100 transition-colors" href="#proyectos">Proyectos</a>
+
+    <!-- Contenedor con ID y posición relativa -->
+    <div class="hidden md:flex items-center gap-8 font-headline tracking-tight relative" id="nav-links">
+
+      <!-- Barra deslizante -->
+      <span
+        id="nav-indicator"
+        class="absolute -bottom-1 h-0.5 bg-violet-400 rounded-full transition-all duration-300 ease-out pointer-events-none"
+        style="left:0; width:0;"
+      ></span>
+
+      <!-- Links con data-nav-link -->
+      {links.map((link) => (
+        <a
+          href={link.href}
+          data-nav-link
+          class="relative pb-1 text-slate-400 font-medium hover:text-slate-100 transition-colors"
+        >
+          {link.label}
+        </a>
+      ))}
     </div>
-    <a href="mailto:tu@email.com"
-       class="bg-primary-container text-on-primary-container px-6 py-2 rounded-xl font-semibold hover:opacity-90 transition-all">
+
+    <a
+      href="mailto:genesismoralesc1@gmail.com"
+      class="bg-primary-container text-on-primary-container px-6 py-2 rounded-xl font-semibold hover:opacity-90 transition-all">
       Contáctame
     </a>
+
   </div>
 </nav>
+
+<script>
+  const indicator    = document.getElementById('nav-indicator') as HTMLSpanElement
+  const navContainer = document.getElementById('nav-links') as HTMLDivElement
+  const navLinks     = document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]')
+
+  function moveIndicator(el: HTMLAnchorElement) {
+    const navRect  = navContainer.getBoundingClientRect()
+    const linkRect = el.getBoundingClientRect()
+    indicator.style.left  = `${linkRect.left - navRect.left}px`
+    indicator.style.width = `${linkRect.width}px`
+  }
+
+  function setActive(activeLink: HTMLAnchorElement) {
+    navLinks.forEach(l => {
+      l.classList.remove('text-slate-100')
+      l.classList.add('text-slate-400')
+    })
+    activeLink.classList.remove('text-slate-400')
+    activeLink.classList.add('text-slate-100')
+    moveIndicator(activeLink)
+  }
+
+  // Click
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => setActive(link))
+  })
+
+  // Scroll
+  const sections = document.querySelectorAll<HTMLElement>('section[id]')
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id')
+        const active = document.querySelector<HTMLAnchorElement>(`[data-nav-link][href="#${id}"]`)
+        if (active) setActive(active)
+      }
+    })
+  }, { threshold: 0.5 })
+
+  sections.forEach(s => observer.observe(s))
+
+  // Inicial — pequeño delay para que el DOM esté listo
+  requestAnimationFrame(() => {
+    const first = navLinks[0]
+    if (first) setActive(first)
+  })
+</script>
