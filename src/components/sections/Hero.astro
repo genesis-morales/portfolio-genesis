@@ -1,0 +1,52 @@
+---
+// src/components/sections/HeroSection.astro
+---
+
+<section
+  class="relative pt-32 pb-24 md:pt-48 md:pb-40 px-6 overflow-hidden"
+  id="home"
+>
+  <!-- Glows de fondo -->
+  <div class="absolute top-0 -left-20 w-96 h-96 bg-primary-container/20 rounded-full blur-[120px] pointer-events-none"></div>
+  <div class="absolute bottom-0 -right-20 w-96 h-96 bg-secondary-container/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto relative z-10 text-center md:text-left">
+
+    <!-- Badge -->
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container-highest border border-outline-variant/20 mb-8">
+      <span class="w-2 h-2 rounded-full bg-green-400 shadow-[0_0_10px_#4ade80]"></span>
+      <span class="text-secondary font-label text-xs uppercase tracking-widest font-semibold">
+        Disponible para proyectos freelance
+      </span>
+    </div>
+
+    <!-- Título -->
+    <h1 class="font-headline text-5xl md:text-8xl font-extrabold tracking-tighter mb-6 leading-tight max-w-4xl">
+      <span class="text-on-surface">Full Stack Developer</span>
+      <span class="text-gradient block">& Freelancer</span>
+    </h1>
+
+    <!-- Subtítulo -->
+    <p class="font-body text-on-surface-variant text-lg md:text-xl max-w-2xl mb-12 leading-relaxed">
+      Construyo aplicaciones web y sitios profesionales con React, Spring Boot,
+      Laravel y Astro. Código limpio, buen rendimiento y diseño funcional.
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+      <a
+        href="#proyectos"
+        class="btn-primary text-on-primary font-semibold px-8 py-4 rounded-xl text-lg hover:shadow-[0_0_30px_rgba(111,61,217,0.4)] transition-all text-center"
+      >
+        Ver proyectos
+      </a>
+      <a
+        href="#contacto"
+        class="bg-surface-container-highest border border-outline-variant/15 text-on-surface font-semibold px-8 py-4 rounded-xl text-lg hover:bg-surface-bright transition-all text-center"
+      >
+        Contáctame
+      </a>
+    </div>
+
+  </div>
+</section>
