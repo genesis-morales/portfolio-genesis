@@ -17,10 +17,27 @@ type Project = {
 };
 
 const projects: Project[] = [
+    {
+    title: "Roberto Herrera — Clases de música",
+    category: "Sitio web · informativo con agenda de clases",
+    year: "2026",
+    description:
+      "Sitio informativo para músico y docente. Presenta su oferta de clases, perfil artístico y agenda directa mediante Calendly.",
+    stack: ["Astro", "Tailwind"],
+    images: ["/projects/profesor-musica.png"],
+    alt: "Sitio web para profesor de música Roberto Herrera",
+    links: [
+      {
+        label: "Ver sitio",
+        href: "https://robhs-web.vercel.app/",
+        primary: true,
+      },
+    ],
+  },
   {
     title: "Catálogo de productos",
     category: "Full Stack · E-commerce",
-    year: "2025",
+    year: "2026",
     description:
       "Plataforma de compras con catálogo público, carrito y checkout. Panel administrativo para gestionar inventario, órdenes y clientes.",
     stack: ["React", "TypeScript", "SCSS", "Laravel", "MySQL"],
@@ -60,36 +77,16 @@ const projects: Project[] = [
       },
     ],
   },
-  {
-    title: "Roberto Herrera — Clases de música",
-    category: "Sitio web · informativo con agenda de clases",
-    year: "2025",
-    description:
-      "Sitio informativo para músico y docente. Presenta su oferta de clases, perfil artístico y agenda directa mediante Calendly.",
-    stack: ["Astro", "Tailwind"],
-    images: ["/projects/profesor-musica.png"],
-    alt: "Sitio web para profesor de música Roberto Herrera",
-    links: [
-      {
-        label: "Ver sitio",
-        href: "https://robhs-web.vercel.app/",
-        primary: true,
-      },
-    ],
-  },
+
 ];
 ---
-
 <section class="px-6 py-24 bg-surface-container-low" id="proyectos">
   <div class="mx-auto max-w-6xl">
 
-    <div class="mb-20 flex flex-col gap-2">
-      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-        Portafolio
-      </p>
-      <h2 class="font-headline text-4xl font-bold text-on-surface md:text-5xl">
-        Proyectos destacados
-      </h2>
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-20">
+      <h2 class="font-headline text-4xl md:text-5xl font-bold text-on-surface mb-4">Proyectos</h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-primary to-transparent mx-auto"></div>
     </div>
 
     <div class="flex flex-col divide-y divide-outline-variant/15">
@@ -131,7 +128,7 @@ const projects: Project[] = [
                     rel="noopener noreferrer"
                     class={`inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-medium transition ${
                       link.primary
-                        ? "bg-primary text-white hover:opacity-90"
+                        ? "bg-primary-container text-on-primary-container hover:opacity-90"
                         : "border border-outline-variant/20 bg-surface text-on-surface hover:bg-surface-container"
                     }`}
                   >

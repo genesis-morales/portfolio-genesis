@@ -38,14 +38,17 @@ body {
   border: 1px solid rgba(145, 143, 161, 0.15);
 }
 
-.text-gradient {
-  background: linear-gradient(135deg, #d0bcff 0%, #6f3dd9 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.btn-primary {
+  background-color: var(--color-primary-container);
+  color: var(--color-on-primary-container);
 }
 
-.btn-primary {
-  background: linear-gradient(135deg, #d0bcff 0%, #6f3dd9 100%);
+.btn-primary:hover {
+  background-color: color-mix(in oklch, var(--color-primary-container) 85%, white);
+}
+
+.btn-primary:active {
+  background-color: color-mix(in oklch, var(--color-primary-container) 70%, black);
 }
 
 .material-symbols-outlined {
